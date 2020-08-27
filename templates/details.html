@@ -10,4 +10,12 @@
 <button><a href="/users/{{user.id}}/delete">Delete</a></button>
 
 <button><a href="/users" class="">Go Back to User List</a></button>
+
+<h2>Posts</h2>
+<ul>
+    {%for post in posts%}
+    <li><a href="/posts/{{post.id}}" class="">{{post.title}}</a></li>
+    {%endfor%}
+</ul>
+<button><a href="/users/{{user.id}}/posts/new" class="">Create New Post</a></button>
 {%endblock%}

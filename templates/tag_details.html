@@ -1,0 +1,23 @@
+{%extends 'base.html'%}
+tag
+posts
+{%block title%}{{tag.name}}{%endblock%}
+
+{%block content%}
+<h1>{{tag.name}}</h1>
+<button><a href="/tags/{{tag.id}}/edit">Edit Tag</a></button>
+<button><a href="/tags/{{tag.id}}/delete">Delete</a></button>
+
+<button><a href="/tags" class="">Go Back to Tag List</a></button>
+
+<h2>Posts</h2>
+<ul>
+    {%for post in posts%}
+    {%for post_tag in post.tags%}
+    {% if post_tag.id == tag.id %}
+    <li><a href="/posts/{{post.id}}" class="">{{post.title}}</a></li>
+    {%endif%}
+    {%endfor%}
+    {%endfor%}
+</ul>
+{%endblock%}

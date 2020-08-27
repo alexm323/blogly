@@ -1,7 +1,7 @@
 from unittest import TestCase
 
 from app import app
-from models import db, User
+from models import db, User, Post
 
 # Use test database and don't clutter tests with SQL
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///sqla_blogly_test'
@@ -27,7 +27,10 @@ class BloglyViewsTestCase(TestCase):
 
         user = User(first_name='Alexander', last_name='Hamilton',
                     image_url='https://upload.wikimedia.org/wikipedia/commons/0/05/Alexander_Hamilton_portrait_by_John_Trumbull_1806.jpg')
+        # post = Post(title='The Federalist Papers',
+        #             content='In defense of the constitution', user_id='1')
         db.session.add(user)
+        # db.session.add(post)
         db.session.commit()
 
         self.user_id = user.id
@@ -72,3 +75,11 @@ class BloglyViewsTestCase(TestCase):
 
             self.assertEqual(resp.status_code, 200)
             self.assertIn("<h1>Aaron Burr</h1>", html)
+
+    # def test_new_post_form(self):
+    #     with app.test_client() as client:
+    #         resp = client.get('/users/1/posts/new')
+    #         html = resp.get_data(as_text=True)
+
+    #         self.assertEqual(resp.status_code, 200)
+    #         self.assertIn('Create a post', html)

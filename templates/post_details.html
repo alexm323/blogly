@@ -1,0 +1,25 @@
+{%extends 'base.html'%}
+
+{%block title%}{{post.title}}{%endblock%}
+
+{%block content%}
+<h1>{{post.title}}</h1>
+<h3>{{post.content}}</h3>
+<cite>By {{post.user.first_name}} {{post.user.last_name}}</cite>
+
+
+<h2>Tags</h2>
+<ul>
+    {%for tag in tags%}
+    {%for post_tag in tag.posts%}
+    {% if post_tag.id == post.id %}
+    <li><a href="/tags/{{tag.id}}" class="">{{tag.name}}</a></li>
+    {%endif%}
+    {%endfor%}
+    {%endfor%}
+</ul>
+
+<button><a href="/">Cancel</a></button>
+<button><a href="/posts/{{post.id}}/edit">Edit Post</a></button>
+<button><a href="/posts/{{post.id}}/delete">Delete Post</a></button>
+{%endblock%}
